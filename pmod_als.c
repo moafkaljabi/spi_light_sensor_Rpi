@@ -15,6 +15,11 @@
  * CPHA:1
  * ADC uses SPI Mode 3;
  *
+ * ALS sends two bytes: 
+ * First Byte: 
+ *
+ * Second Byte:
+ *
  *
  * */
 #include <linux/types.h>
@@ -26,7 +31,16 @@
 #include <linux/fs.h>
 #include <linux/spi/spi.h>
 
-#Define 
+#define CPOL		1
+#define CPHA 	 	1
+#define SPI_MODE 	3
+#define SPI_MAX_CLK	100000
+
+uint8_t spi_bits = 8;
+
+struct* spi_device = [];
+
+
 
 staitc int __init driver_init(void)
 {
