@@ -1,1 +1,0 @@
-savedcmd_/home/moafk/spi_light_sensor_Rpi/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/moafk/spi_light_sensor_Rpi/Module.symvers -T /home/moafk/spi_light_sensor_Rpi/modules.order -i Module.symvers -e 

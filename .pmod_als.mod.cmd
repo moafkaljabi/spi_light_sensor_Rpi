@@ -1,1 +1,0 @@
-savedcmd_/home/moafk/spi_light_sensor_Rpi/pmod_als.mod := printf '%s\n'   pmod_als.o | awk '!x[$$0]++ { print("/home/moafk/spi_light_sensor_Rpi/"$$0) }' > /home/moafk/spi_light_sensor_Rpi/pmod_als.mod
