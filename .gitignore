@@ -1,1 +1,16 @@
-.notes
+
+
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!als_pmod.c
+!Makefile
+!README.md
+!LICENSE
+# etc...
+
+# ...even if they are in subdirectories
+!*/
+   
