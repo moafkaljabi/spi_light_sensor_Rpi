@@ -1,0 +1,1 @@
+savedcmd_/home/moafk/spi_light_sensor_Rpi/pmod_als.ko := aarch64-linux-gnu-ld -r -EL  -maarch64elf -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T arch/arm64/module.lds -o /home/moafk/spi_light_sensor_Rpi/pmod_als.ko /home/moafk/spi_light_sensor_Rpi/pmod_als.o /home/moafk/spi_light_sensor_Rpi/pmod_als.mod.o /home/moafk/spi_light_sensor_Rpi/.module-common.o
