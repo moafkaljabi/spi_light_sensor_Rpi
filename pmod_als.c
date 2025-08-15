@@ -29,18 +29,93 @@
 #include <linux/of.h>
 #include <linux/uaccess.h>
 #include <linux/fs.h>
+#include <linux/miscdevice.h>
 #include <linux/spi/spi.h>
 
-#define CPOL		1
-#define CPHA 	 	1
-#define SPI_MODE 	3
-#define SPI_MAX_CLK	100000
 
-uint8_t spi_bits = 8;
-
-struct* spi_device = [];
+#define PMOD_ALS_SPI_MODE 			SPI_MODE_3   /*CPOL: 1 and CPHA: 1*/
+#define PMOD_ALS_SPI_BITS 			8  
+#define PMOD_ALS_SPI_MAX_CLK		3200000	 	 /* 3.2 MHz, from ADC datasheet */ 
 
 
+/*
+
+  Driver State.
+  spi_device*, is owned by the kernel.
+
+*/
+
+struct* pmod_als_spi_device = {
+	struct spi_device *spi_device;
+	struct misc_device misc_device;
+};
+
+
+
+
+/* 
+
+file → The open file object (kernel's tracking of an open FD).
+
+buf → Pointer in user space where we copy our result.
+
+count → How many bytes the user requested.
+
+file_pos_ptr → "File position pointer". Even in device files, Linux tracks offsets.
+
+*/
+
+static ssize_t pmod_als_read(struct file *file,
+							char __user *buf
+							size_t count,
+							loff_t *file_pos_ptr)
+{
+	struct pmod_als_device *als_device = container_of(file -> private_data,
+													  struct pmod_als_device,
+													  misc_device)
+
+			u8 rx[2] = {0};
+			struct spi_transfer spi_t = {
+				.tx_buf = NULL,
+				.rx_buf = rx,
+				.len = 2,
+				.speed_hz = PMOD_ALS_SPI_MAX_CLK,
+				.bits_per_word = PMOD_ALS_SPI_BITS,
+			};
+
+			/*
+			- Create empty message
+			- Check EOF for the read
+			*/
+			struct spi_message spi_msg;
+			u16 raw_value; 
+			u8 pared_value;
+			char data_str[8];
+			int len;
+
+			if(*file_pos_ptr > 0)
+			{
+				return 0;
+			}
+
+}
+
+
+// File operations
+
+
+
+// Probe function
+
+
+
+// Remove function
+
+
+// Device tree match table
+
+
+// SPI driver definition 
 
 staitc int __init driver_init(void)
 {
@@ -61,6 +136,6 @@ module_exit(driver_exit);
 
 
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("SPI Driver for Digilent ALS");
+MODULE_DESCRIPTION("SPI Driver for Digilent PMOD ALS");
 MODULE_AUTHOR("MA");
 
